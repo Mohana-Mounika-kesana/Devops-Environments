@@ -1,0 +1,45 @@
+name: Artifact-Workflow
+
+on:
+  workflow_run:
+    workflows:
+      - Security-Workflow
+    types:
+      - completed
+
+env:
+  JAVA_VERSION: '17'
+
+jobs:
+  artifact-run:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: maven
+
+      - name: Package Application
+        run: mvn package
+
+      - name: Verify Artifact
+        run: |
+          echo "Contents of target directory"
+          ls -la target
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-application
+          path: target/*.jar
+
+      - name: Artifact Upload Success
+        run: echo "Artifact uploaded successfully"
