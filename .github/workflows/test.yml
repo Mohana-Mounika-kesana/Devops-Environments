@@ -5,16 +5,19 @@ on:
     workflows: ["Build-Workflow"]
     types:
       - completed
+env:
+  JAVA_VERSION: '17'
 jobs:
   test-run:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: set up java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
+          cache: 'maven'
       - name: run test 
         run: mvn test
