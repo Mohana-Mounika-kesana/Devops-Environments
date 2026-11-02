@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Build-Workflow"]
     types:
-      - completed
+      - success
 env:
   JAVA_VERSION: '17'
 jobs:
