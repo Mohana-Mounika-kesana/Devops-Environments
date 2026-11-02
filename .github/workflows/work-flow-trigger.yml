@@ -1,0 +1,19 @@
+name: Work-Flow-Trigger-Check
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+      - name: i did checkout and java setup
+        run: echo "Checked out repository and set up Java 17"
+  
