@@ -17,5 +17,6 @@ jobs:
           java-version: '17'
       - name: i did checkout and java setup
         run: |
-          echo java --version
+          echo "new branch created successfully"
           echo "Checked out repository and set up Java 17"
+          echo "Workflow triggered successfully"
