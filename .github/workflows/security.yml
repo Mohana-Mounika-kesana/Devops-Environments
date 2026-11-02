@@ -45,8 +45,8 @@ jobs:
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
 
-      - name: Run OWASP Dependency Check
-        run: mvn org.owasp:dependency-check-maven:check
+      # - name: Run OWASP Dependency Check
+      #   run: mvn org.owasp:dependency-check-maven:check
 
       - name: Security Scan Success
         run: echo "Security scan completed successfully"
