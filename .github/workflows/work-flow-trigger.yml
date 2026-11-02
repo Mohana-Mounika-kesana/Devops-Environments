@@ -1,12 +1,9 @@
 name: Work-Flow-Trigger-Checkworkflow
 
 on:
-  push:
-    branches:
-      - main
-      - feature/*
+  workflow_call:
 jobs:
-  hello:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,4 +17,4 @@ jobs:
         run: |
           echo "new branch created successfully"
           echo "Checked out repository and set up Java 17"
-          echo "Workflow triggered successfully"
+          echo "Workflow triggered by the child workflow"
