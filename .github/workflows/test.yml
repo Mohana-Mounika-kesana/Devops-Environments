@@ -2,22 +2,36 @@ name: Test-Workflow
 
 on:
   workflow_run:
-    workflows: ["Build-Workflow"]
+    workflows:
+      - Build-Workflow
     types:
-      - success
+      - completed
+
 env:
   JAVA_VERSION: '17'
+
 jobs:
   test-run:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout repo
+      - name: Trigger Verification
+        run: echo "Triggered after Build-Workflow completion"
+
+      - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: set up java
+
+      - name: Set Up Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-          cache: 'maven'
-      - name: run test 
+          distribution: temurin
+          cache: maven
+
+      - name: Run Tests
         run: mvn test
+
+      - name: Test Success
+        run: echo "Tests completed successfully"

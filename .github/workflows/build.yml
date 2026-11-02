@@ -1,27 +1,36 @@
 name: Build-Workflow
 
-on: 
+on:
   push:
     branches:
       - main
-      - feature/**
+      - 'feature/**'
+
   pull_request:
     branches:
       - main
-      - feature/**
+      - 'feature/**'
+
 env:
   JAVA_VERSION: '17'
+
 jobs:
   build-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: set up java
+
+      - name: Set Up Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-          cache: 'maven'
-      - name: Build with maven
+          distribution: temurin
+          cache: maven
+
+      - name: Build with Maven
         run: mvn clean compile
+
+      - name: Build Success
+        run: echo "Build completed successfully"
