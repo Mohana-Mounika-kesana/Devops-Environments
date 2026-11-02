@@ -1,0 +1,20 @@
+name: Test-Workflow
+
+on:
+  workflow_run:
+    workflows: ["Build-Workflow"]
+    types:
+      - completed
+jobs:
+  test-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: set up java
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+      - name: run test 
+        run: mvn test
