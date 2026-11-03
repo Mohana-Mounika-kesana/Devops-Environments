@@ -44,7 +44,7 @@ class CalculatorTest {
     class Subtraction {
         @Test
         void subtractsNumbers() {
-            assertEquals(1, calculator.subtract(5, 2), DELTA);
+            assertEquals(3, calculator.subtract(5, 2), DELTA);
         }
 
         @Test
