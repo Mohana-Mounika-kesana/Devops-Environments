@@ -46,7 +46,7 @@ public class Calculator {
             case "*" -> multiply(a, b);
             case "/" -> divide(a, b);
             case "%" -> modulo(a, b);
-            case "^" -> power(a, b);
+           
             default -> throw new IllegalArgumentException("Unsupported operator: " + operator);
         };
     }
