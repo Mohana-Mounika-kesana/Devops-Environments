@@ -80,6 +80,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: my-artifacts
+      - name : Deploy Details 
+        run: |
+        echo "================================="
+        echo "ENVIRONMENT : DEV"
+        echo "BRANCH      : ${{ github.ref_name }}"
+        echo "COMMIT SHA  : ${{ github.sha }}"
+        echo "TRIGGERED BY: ${{ github.actor }}"
+        echo "================================="
+        echo ""
+        echo "LATEST COMMIT:"
+        git log -1 --pretty=format:"Author: %an <%ae>%nDate: %ad%nCommit: %H%nMessage: %s"
 
       - name: Deploy to DEV
         run: echo "Deploying to DEV environment"
