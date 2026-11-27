@@ -76,21 +76,24 @@ jobs:
     environment: Dev
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: my-artifacts
-      - name : Deploy Details 
+      - name: Deploy Details
         run: |
-        echo "================================="
-        echo "ENVIRONMENT : DEV"
-        echo "BRANCH      : ${{ github.ref_name }}"
-        echo "COMMIT SHA  : ${{ github.sha }}"
-        echo "TRIGGERED BY: ${{ github.actor }}"
-        echo "================================="
-        echo ""
-        echo "LATEST COMMIT:"
-        git log -1 --pretty=format:"Author: %an <%ae>%nDate: %ad%nCommit: %H%nMessage: %s"
+          echo "================================="
+          echo "ENVIRONMENT : DEV"
+          echo "BRANCH      : ${{ github.ref_name }}"
+          echo "COMMIT SHA  : ${{ github.sha }}"
+          echo "TRIGGERED BY: ${{ github.actor }}"
+          echo "================================="
+          echo ""
+          echo "LATEST COMMIT:"
+          git log -1 --pretty=format:"Author: %an <%ae>%nDate: %ad%nCommit: %s"
 
       - name: Deploy to DEV
         run: echo "Deploying to DEV environment"
